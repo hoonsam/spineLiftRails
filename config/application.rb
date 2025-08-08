@@ -23,5 +23,14 @@ module SpineLiftRails
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    
+    # Use async adapter for Active Job in development without Redis
+    config.active_job.queue_adapter = :async
+    
+    # Disable Active Storage analysis job
+    config.active_storage.analyze_on_upload = false
+    
+    # Configure Active Storage to use S3 in production
+    # config.active_storage.variant_processor = :mini_magick
   end
 end

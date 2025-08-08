@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>프로젝트 지속성 디버깅</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #fff; }
+        .code { background: #333; padding: 10px; border-radius: 5px; margin: 10px 0; }
+        .success { color: #4ade80; }
+        .error { color: #f87171; }
+        .info { color: #60a5fa; }
+    </style>
+</head>
+<body>
+    <h1>🔍 프로젝트 지속성 디버깅 가이드</h1>
+    
+    <h2>1. 브라우저 콘솔 확인사항</h2>
+    <div class="code">
+        <p class="info">F12를 눌러 개발자 도구 열기 → Console 탭 확인</p>
+        <p>다음 로그들이 나타나야 함:</p>
+        <ul>
+            <li>✅ "Saved project ID to localStorage: [프로젝트ID]"</li>
+            <li>✅ "Checking for saved project: {savedProjectId: '...', user: '...', ...}"</li>
+            <li>✅ "Loading project: [프로젝트ID]"</li>
+            <li>✅ "Project loaded: [프로젝트명]"</li>
+            <li>✅ "Layers loaded: [레이어 개수]"</li>
+        </ul>
+    </div>
+
+    <h2>2. localStorage 직접 확인</h2>
+    <div class="code">
+        <p>브라우저 콘솔에서 다음 명령어 실행:</p>
+        <pre>
+// 저장된 모든 데이터 확인
+console.log('Token:', localStorage.getItem('token'));
+console.log('Project ID:', localStorage.getItem('currentProjectId'));
+
+// 모든 localStorage 키 확인
+Object.keys(localStorage).forEach(key => {
+    console.log(key, ':', localStorage.getItem(key));
+});
+        </pre>
+    </div>
+
+    <h2>3. 테스트 순서</h2>
+    <ol>
+        <li>http://localhost:5173 접속</li>
+        <li>로그인 (demo@example.com / password123)</li>
+        <li>PSD 파일 업로드 후 처리 완료 대기</li>
+        <li>레이어가 표시되면 F12로 콘솔 열어서 확인:
+            <div class="code">localStorage.getItem('currentProjectId') // 값이 있어야 함</div>
+        </li>
+        <li>F5로 새로고침</li>
+        <li>콘솔에서 로딩 로그 확인</li>
+    </ol>
+
+    <h2>4. 문제 해결</h2>
+    <div class="code">
+        <p class="error">❌ 문제: "currentProjectId"가 null</p>
+        <p>→ 프로젝트 선택 시 저장 안됨</p>
+        
+        <p class="error">❌ 문제: "Failed to load saved project" 에러</p>
+        <p>→ API 호출 실패 (401 또는 404)</p>
+        
+        <p class="error">❌ 문제: "Checking for saved project"에서 hasCurrentProject: true</p>
+        <p>→ 이미 프로젝트가 로드되어 있어서 중복 로드 안함</p>
+    </div>
+
+    <h2>5. 수동 테스트</h2>
+    <div class="code">
+        <p>콘솔에서 직접 프로젝트 로드 테스트:</p>
+        <pre>
+// 저장된 프로젝트 ID 가져오기
+const projectId = localStorage.getItem('currentProjectId');
+const token = localStorage.getItem('token');
+
+// API 직접 호출
+fetch(`http://localhost:3000/api/v1/projects/${projectId}`, {
+    headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    }
+})
+.then(res => res.json())
+.then(data => console.log('Project data:', data))
+.catch(err => console.error('Error:', err));
+        </pre>
+    </div>
+
+    <h2>6. 개선된 코드 변경사항</h2>
+    <ul class="success">
+        <li>✅ useEffect 분리: 인증 체크와 프로젝트 로드를 별도 effect로 분리</li>
+        <li>✅ 의존성 수정: user와 token 모두 확인 후 프로젝트 로드</li>
+        <li>✅ 디버깅 로그 추가: localStorage 저장/로드 시점 추적</li>
+        <li>✅ 조건 개선: !currentProject 체크로 중복 로드 방지</li>
+    </ul>
+</body>
+</html>

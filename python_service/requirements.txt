@@ -1,0 +1,12 @@
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6
+numpy>=1.26.0
+opencv-python>=4.8.0
+pillow>=10.0.0
+psd-tools>=1.9.0
+triangle==20230923
+requests>=2.31.0
+python-dotenv>=1.0.0
+aiofiles>=23.0.0
+httpx>=0.25.0

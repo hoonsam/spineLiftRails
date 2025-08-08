@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Persistence</title>
+</head>
+<body>
+    <h1>SpineLift Persistence Test</h1>
+    <p>This test will verify that projects persist across page refreshes.</p>
+    
+    <h2>Instructions:</h2>
+    <ol>
+        <li>Open the application at <a href="http://localhost:5173" target="_blank">http://localhost:5173</a></li>
+        <li>Log in with your credentials</li>
+        <li>Upload a PSD file and wait for processing</li>
+        <li>Once layers are shown, refresh the page (F5)</li>
+        <li>You should see:
+            <ul>
+                <li>✅ User stays logged in</li>
+                <li>✅ Project is still loaded</li>
+                <li>✅ Layers are displayed</li>
+                <li>✅ Dark theme UI with 3 columns</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>UI Layout Check:</h2>
+    <p>The interface should have:</p>
+    <ul>
+        <li>Left panel (320px): Layer tree with checkboxes</li>
+        <li>Center panel (flexible): Mesh preview canvas</li>
+        <li>Right panel (384px): Mesh tools with parameters</li>
+        <li>Dark gray background (#1a1f2e)</li>
+        <li>Header with project name and user info</li>
+    </ul>
+
+    <h2>Known Issues Fixed:</h2>
+    <ul>
+        <li>✅ TypeScript errors resolved</li>
+        <li>✅ Custom Tailwind colors added (gray-850)</li>
+        <li>✅ Duplicate components removed</li>
+        <li>✅ localStorage persistence implemented</li>
+        <li>✅ Auth check on mount added</li>
+    </ul>
+</body>
+</html>

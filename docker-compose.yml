@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: spinelift
+      POSTGRES_PASSWORD: spinelift_password
+      POSTGRES_DB: spine_lift_rails_development
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  
+  python_service:
+    build:
+      context: ./python_service
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./python_service:/app
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+  
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://spinelift:spinelift_password@db:5432/spine_lift_rails_development
+      - REDIS_URL=redis://redis:6379/0
+      - PYTHON_SERVICE_URL=http://python_service:8000
+      - RAILS_ENV=development
+    depends_on:
+      - db
+      - redis
+      - python_service
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"
+  
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=postgresql://spinelift:spinelift_password@db:5432/spine_lift_rails_development
+      - REDIS_URL=redis://redis:6379/0
+      - PYTHON_SERVICE_URL=http://python_service:8000
+      - RAILS_ENV=development
+    depends_on:
+      - db
+      - redis
+      - python_service
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+    command: bundle exec sidekiq
+
+volumes:
+  postgres_data:
+  bundle_cache:

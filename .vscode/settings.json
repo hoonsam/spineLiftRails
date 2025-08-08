@@ -16,15 +16,21 @@
       "args": ["-d", "Ubuntu"]
     }
   },
+  "terminal.integrated.cwd": "${workspaceFolder}",
   
   // Ruby/Rails 설정
   "[ruby]": {
     "editor.defaultFormatter": "Shopify.ruby-lsp"
   },
+  "ruby.useLanguageServer": true,
+  "ruby.interpreter.commandPath": "/usr/bin/ruby",
+  "ruby.useBundler": true,
+  "ruby.pathToBundler": "/usr/local/bin/bundle",
   "ruby.format": "rubocop",
   "ruby.lint": {
     "rubocop": true
   },
+  "rubyLsp.rubyVersionManager": "none",
   
   // JavaScript 설정
   "[javascript]": {
