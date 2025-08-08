@@ -6,6 +6,17 @@
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   
+  // WSL 설정
+  "remote.WSL.enable": true,
+  "remote.autoForwardPorts": true,
+  "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+  "terminal.integrated.profiles.windows": {
+    "Ubuntu (WSL)": {
+      "path": "wsl.exe",
+      "args": ["-d", "Ubuntu"]
+    }
+  },
+  
   // Ruby/Rails 설정
   "[ruby]": {
     "editor.defaultFormatter": "Shopify.ruby-lsp"

@@ -1,5 +1,9 @@
 {
   "recommendations": [
+    // WSL Remote
+    "ms-vscode-remote.remote-wsl",
+    "ms-vscode-remote.vscode-remote-extensionpack",
+    
     // Ruby/Rails
     "shopify.ruby-lsp",
     "castwide.solargraph",

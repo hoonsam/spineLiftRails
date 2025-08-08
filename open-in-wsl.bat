@@ -1,0 +1,3 @@
+@echo off
+echo Opening SpineLift Rails in WSL...
+code --remote wsl+Ubuntu /home/hoons/spineLiftRails

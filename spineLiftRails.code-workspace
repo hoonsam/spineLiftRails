@@ -1,0 +1,18 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "SpineLift Rails"
+    }
+  ],
+  "settings": {
+    "remote.WSL.enable": true,
+    "remote.WSL.defaultDistribution": "Ubuntu"
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-vscode-remote.remote-wsl"
+    ]
+  },
+  "remoteAuthority": "wsl+Ubuntu"
+}
