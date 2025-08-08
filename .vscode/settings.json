@@ -1,0 +1,54 @@
+{
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  
+  // Ruby/Rails 설정
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp"
+  },
+  "ruby.format": "rubocop",
+  "ruby.lint": {
+    "rubocop": true
+  },
+  
+  // JavaScript 설정
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  
+  // Git 설정
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  
+  // 파일 제외 설정
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/tmp": true,
+    "**/log": true,
+    "**/.bundle": true,
+    "**/vendor/bundle": true
+  },
+  
+  // 검색 제외 설정
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/vendor": true,
+    "**/tmp": true,
+    "**/log": true,
+    "**/.git": true
+  },
+  
+  // Rails 관련
+  "files.associations": {
+    "*.erb": "erb",
+    "*.html.erb": "erb",
+    "Gemfile": "ruby",
+    "Gemfile.lock": "ruby"
+  }
+}

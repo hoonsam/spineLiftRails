@@ -1,0 +1,29 @@
+{
+  "recommendations": [
+    // Ruby/Rails
+    "shopify.ruby-lsp",
+    "castwide.solargraph",
+    "bung87.rails",
+    "hridoy.rails-snippets",
+    
+    // JavaScript
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    
+    // Git
+    "eamodio.gitlens",
+    "donjayamanne.githistory",
+    
+    // 일반 개발
+    "editorconfig.editorconfig",
+    "ms-vscode.live-server",
+    "ritwickdey.liveserver",
+    
+    // Docker (Railway 배포용)
+    "ms-azuretools.vscode-docker",
+    
+    // 데이터베이스
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-pg"
+  ]
+}

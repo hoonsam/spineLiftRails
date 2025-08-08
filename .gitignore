@@ -50,7 +50,7 @@
 
 # Ignore IDE files
 .idea
-.vscode
+# .vscode (팀 설정 공유를 위해 주석 처리)
 *.swp
 *.swo
 *~
